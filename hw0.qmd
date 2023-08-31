@@ -1,0 +1,59 @@
+---
+title: "hw0"
+author: "Ellie Zhang"
+format: html
+editor: visual
+---
+
+## Define the equation we want to solve and set values for its variables
+
+-   Set values for the variables a, b, and c (in this example we have a = 1, b = 3, c = 2)
+
+-   Set the quadratic equation as $f(x) = ax^2 + bx + c = 0$
+
+```{r}
+#| echo: false
+a <- 1
+b <- 3
+c <- 2
+fx <- function(x) {a*x^2 + b*x + c}
+```
+
+## Calculate the solution(s) of the quadratic equation
+
+-   Calculate the discriminate of the quadratic equation as $discriminant = b^2 - 4ac$
+    -   If $discriminant = 0$, the equation has one real solution
+    -   If $discriminant > 0$, the equation has two real solutions
+    -   If $discriminant < 0$, the equation has zero real solution
+-   Calculate and return the solution(s) using the formula $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$, and if there is no real solution, return NA
+
+```{r}
+#| echo: false
+sol <- function(a, b, c) {
+  discrim <- b^2 - 4*a*c
+  if (discrim == 0) {
+    return(-b / (2*a))
+  } else if (discrim > 0) {
+    return(c((-b + sqrt(b^2 - 4*a*c)) / (2*a), 
+             (-b - sqrt(b^2 - 4*a*c)) / (2*a)))
+  } else {
+    return(NA)
+  }
+}
+sol(a, b, c)
+```
+
+## Plot the quadratic equation to confirm the result
+
+-   Create a graph of f(x) versus x for $x\in(-5, 5)$
+
+-   Draw a horizontal line on the graph at f(x) = 0
+
+-   The intersection point(s) between the curve and the horizontal line represents the real solution(s) of the quadratic equation
+
+```{r}
+#| echo: false
+x <- seq(-5, 5, length = 300)
+plot(x, fx(x), type = "l")
+abline(h = 0, lty = 2)
+```
